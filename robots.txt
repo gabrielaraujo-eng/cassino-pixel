@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gabrielaraujo-eng.github.io/cassino-pixel/sitemap.xml
