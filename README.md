@@ -2,50 +2,104 @@
 
 ![Banner de Cassino Pixel](./assets/cassino-pixel-banner.png)
 
-> Blackjack, pôquer e caça-níquel em um cassino pixel-art com fichas virtuais e partidas rápidas.
+> experiência de cassino pixel-art com fichas virtuais, criada por [Gabriel Lúcio de Araújo](https://github.com/gabrielaraujo-eng).
+
+<p align="center">
+  <a href="https://gabrielaraujo-eng.github.io/cassino-pixel/">
+    <img src="./assets/cassino-pixel-banner.png" alt="Banner de Cassino Pixel" width="100%" />
+  </a>
+</p>
+
+<p align="center"><strong><a href="https://gabrielaraujo-eng.github.io/cassino-pixel/">▶ Jogar Cassino Pixel</a></strong></p>
+
+**Cassino Pixel** reúne minijogos de cassino em uma interface pixel-art. Escolha uma mesa, use fichas virtuais e jogue partidas rápidas de Blackjack, pôquer e caça-níquel, sem dinheiro real.
 
 ## Jogar
 
-**[Abrir Cassino Pixel no navegador](https://gabrielaraujo-eng.github.io/cassino-pixel/)**
+- **[Abrir a versão publicada](<https://gabrielaraujo-eng.github.io/cassino-pixel/>)**
+- **[Ver o código no GitHub](https://github.com/gabrielaraujo-eng/cassino-pixel)**
+- **[Abrir o Arcade Gabriel](https://gabriel-lucio-arcade-c27ec.web.app/)**
 
-A versão publicada fica na raiz deste repositório e é disponibilizada pelo GitHub Pages.
+A versão atual identificada neste repositório é **atual** e permanece na raiz do projeto.
 
-## Versão atual
+## O que foi melhorado nesta separação
 
-A versão atual identificada no catálogo é **atual**. As versões históricas permanecem separadas em [`versoes-antigas/`](./versoes-antigas/) quando disponíveis, sem substituir o jogo atual.
+Esta versão foi organizada como um projeto independente a partir do jogo publicado, mantendo a versão atual na raiz e o histórico em pastas próprias. Além da documentação própria, foram ajustados:
 
-## Sobre o jogo
+- título, descrição, autoria e URL canônica para o novo repositório;
+- metadados de tema e compartilhamento para navegadores e redes sociais;
+- documentação de controles, compatibilidade e arquitetura;
+- workflow preparado para publicação no GitHub Pages;
+- banner e favicon próprios do jogo;
+- remoção dos arquivos de coleta de dados e dos backups técnicos.
 
-Blackjack, pôquer e caça-níquel em um cassino pixel-art com fichas virtuais e partidas rápidas. O projeto foi separado do Arcade Gabriel para manter uma cópia independente, fácil de jogar, consultar e preservar.
+**Cassino Pixel** preserva as funcionalidades centrais do jogo: O projeto preserva o salão principal, Blackjack com objetivo de chegar a 21, pôquer, caça-níquel, fichas virtuais e navegação entre as mesas.
 
-## Controles e como jogar
+## Controles
 
-- Abra o link acima e use as instruções exibidas na tela inicial.
-- O jogo funciona diretamente no navegador, sem instalação.
-- Em telas menores, use os controles touch quando o jogo oferecer essa opção.
+| Ação | Teclado e mouse | Touch |
+| --- | --- | --- |
+| Escolher uma mesa | clicar no card do jogo | tocar no card |
+| Jogar Blackjack | usar os botões da mesa | tocar nos botões |
+| Jogar pôquer | selecionar a ação exibida | tocar na ação |
+| Usar caça-níquel | clicar no controle da máquina | tocar no controle |
+| Voltar ao salão | botão de retorno | botão na interface |
+
+As fichas são virtuais e servem apenas para a experiência local do jogo. Não há apostas ou pagamentos reais.
 
 ## Rodar localmente
 
-Sirva esta pasta por HTTP para que scripts, módulos e recursos carreguem corretamente:
+O projeto não precisa de build nem de dependências instaladas. Sirva a pasta por HTTP para que os recursos do navegador funcionem normalmente:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Depois abra <http://localhost:8000>.
+Depois abra <http://localhost:8000>. Também é possível usar qualquer servidor estático, como o Live Server do VS Code. Abrir o arquivo diretamente com `file://` pode limitar alguns recursos do navegador.
 
-## SEO e identidade visual
+## Stack
 
-A página inclui título e descrição específicos, URL canônica, Open Graph, Twitter Card, `robots.txt`, sitemap, favicon e banner próprios deste jogo.
+- HTML, CSS e JavaScript client-side; interface pixel-art e lógica de minijogos executadas no navegador; sem backend próprio.
+- Interface, regras e fluxo principal executados no cliente;
+- workflow do GitHub Actions preparado para o GitHub Pages.
 
-## Privacidade
+Não há backend próprio neste repositório.
 
-Este repositório não inclui o bloco de coleta de atividade, ranking ou envio de estatísticas para serviços externos. O progresso local que o jogo eventualmente oferecer permanece no navegador.
+## Estrutura
 
-## Histórico
+```text
+.
+├── index.html                 # versão atual do jogo
+├── assets/                    # banner e favicon do projeto
+├── versoes-antigas/           # versões históricas preservadas
+├── README.md                  # documentação do projeto
+└── .github/workflows/pages.yml # publicação no GitHub Pages
+```
 
-As versões antigas estão em pastas próprias dentro de [`versoes-antigas/`](./versoes-antigas/), preservadas para comparação e memória do desenvolvimento.
+## Privacidade e dados locais
+
+O jogo não coleta dados pessoais, não processa pagamentos e não envia resultados para serviços externos. As fichas virtuais não possuem valor monetário. O repositório não contém o bloco de coleta de atividade, ranking ou envio de estatísticas que existia em versões anteriores.
+
+## Roadmap
+
+- separar CSS e JavaScript em módulos menores sem alterar a experiência atual;
+- adicionar testes de fumaça para a abertura e o fluxo principal;
+- revisar o carregamento das dependências CDN e oferecer uma estratégia offline;
+- melhorar acessibilidade de menus, diálogos e indicadores da interface;
+- adicionar uma página de changelog para as próximas versões.
+
+## Projetos relacionados
+
+- [Arcade Gabriel](https://gabriel-lucio-arcade-c27ec.web.app/) · [abrir arcade](https://gabriel-lucio-arcade-c27ec.web.app/)
+- [Portfólio de projetos](https://github.com/gabrielaraujo-eng/projetos)
+
 
 ## Créditos
 
-Criado por **Gabriel Lúcio de Araújo**.
+Criado por **Gabriel Lúcio de Araújo**. A versão publicada neste repositório é a referência atual desta separação. Os créditos e links do autor também estão disponíveis dentro do jogo quando aplicável.
+
+## Histórico de versões
+
+As versões antigas preservadas foram organizadas em [`versoes-antigas/`](./versoes-antigas/), cada uma em sua própria pasta. A versão atual permanece na raiz e continua sendo a referência publicada.
+
+- versões históricas ainda não catalogadas neste repositório
