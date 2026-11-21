@@ -1,7 +1,5 @@
 # Cassino Pixel
 
-![Banner de Cassino Pixel](./assets/cassino-pixel-banner.png)
-
 > experiência de cassino pixel-art com fichas virtuais, criada por [Gabriel Lúcio de Araújo](https://github.com/gabrielaraujo-eng).
 
 <p align="center">
