@@ -86,11 +86,14 @@ O jogo não coleta dados pessoais, não processa pagamentos e não envia resulta
 - melhorar acessibilidade de menus, diálogos e indicadores da interface;
 - adicionar uma página de changelog para as próximas versões.
 
-## Projetos relacionados
+## Jogos relacionados
 
-- [Arcade Gabriel](https://gabriel-lucio-arcade-c27ec.web.app/) · [abrir arcade](https://gabriel-lucio-arcade-c27ec.web.app/)
-- [Portfólio de projetos](https://github.com/gabrielaraujo-eng/projetos)
-
+- [Aethra Online](https://github.com/gabrielaraujo-eng/aethra-online)
+- [Bastião 3D](https://github.com/gabrielaraujo-eng/bastiao-3d)
+- [SuperMauricio](https://github.com/gabrielaraujo-eng/super-mauricio)
+- [Clicker](https://github.com/gabrielaraujo-eng/clicker)
+- [Xadrez](https://github.com/gabrielaraujo-eng/xadrez)
+- [5h no Banheiro](https://github.com/gabrielaraujo-eng/5h-no-banheiro)
 
 ## Créditos
 
