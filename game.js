@@ -9,8 +9,10 @@ const KEY = 'cassinoPixel_v1';
 let S = { money: 1000, played: 0, wins: 0, best: 0, sound: true, pkActive: null };
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
-function toast(t) { const d = el('div', 'toast'); d.textContent = t; $('#toasts').append(d); setTimeout(() => d.remove(), 4500); }
-function say(id, t, c) { const e = $('#' + id); e.textContent = t; e.className = 'msg ' + (c || ''); }
+let lastMoneyAnnouncement = null, lastTurnAnnouncement = '';
+function announce(t, urgent = false) { const e = $(urgent ? '#errorAnnouncer' : '#announcer'); if (e && e.textContent !== t) e.textContent = t; }
+function toast(t) { const d = el('div', 'toast'); d.textContent = t; $('#toasts').append(d); announce(t); setTimeout(() => d.remove(), 4500); }
+function say(id, t, c, urgent = false) { const e = $('#' + id); e.textContent = t; e.className = 'msg ' + (c || ''); announce(t, urgent); }
 function settle(net) {
   S.played++;
   if (net > 0) { S.wins++; S.best = Math.max(S.best, net); sfx.win(); } else if (net < 0) sfx.lose();
@@ -93,7 +95,9 @@ function go(id) {
   draw();
 }
 function draw() {
-  $('#money').textContent = mon(S.money);
+  const moneyText = mon(S.money);
+  $('#money').textContent = moneyText;
+  if (lastMoneyAnnouncement !== moneyText) { announce('Saldo atual: ' + moneyText); lastMoneyAnnouncement = moneyText; }
   $('#mute').textContent = 'SOM: ' + (S.sound ? 'ON' : 'OFF');
   $('#stats').innerHTML = `<div>RODADAS<b>${S.played}</b></div><div>VITÓRIAS<b>${S.wins}</b></div><div>MAIOR GANHO<b>${mon(S.best)}</b></div>`;
   $('#bonus').hidden = !(S.money < 25 && !PK.seat && !BJ.bet && !BJ.on);
@@ -285,7 +289,7 @@ async function pkBet(first) {
 function post(p, x) { const a = Math.min(x, p.stack); p.stack -= a; p.bet = a; p.tin = a; if (!p.stack) p.allin = true; }
 
 async function pkHand() {
-  const P = PK.P; setBtns('pk', []);
+  const P = PK.P; setBtns('pk', []); lastTurnAnnouncement = '';
   P.forEach(p => { if (!p.h && p.stack <= 0) p.stack = 500; p.bet = 0; p.tin = 0; p.fold = false; p.allin = false; p.acted = false; p.cards = []; p.act = ''; p.show = !!p.h; p.start = p.stack; });
   if (P[0].stack <= 0) return pkLeave(true);
   S.pkActive = { version: 1, status: 'active', startedAt: Date.now(), hand: S.played + 1 };
@@ -328,7 +332,7 @@ function pkShow() {
   say0(out ? 'VOCÊ PERDEU TODAS AS FICHAS DA MESA' : txt, net > 0 ? 'win' : net < 0 ? 'lose' : '');
   setBtns('pk', out ? [['SAIR DA MESA', () => pkLeave()]] : [['PRÓXIMA MÃO', pkHand, 0, 'green'], ['SAIR DA MESA', () => pkLeave(), 0, 'red']]);
 }
-function say0(t, c) { const m = $('#pkPot'); m.dataset.msg = t; m.dataset.cls = c || ''; pkUI(); }
+function say0(t, c) { const m = $('#pkPot'); m.dataset.msg = t; m.dataset.cls = c || ''; announce(t); pkUI(); }
 function pkLeave() {
   S.money += PK.P[0] ? PK.P[0].stack : 0; S.pkActive = null; PK.seat = false; PK.P = []; PK.board = [];
   $('#pkSitBox').hidden = false; $('#pkTable').hidden = true; setBtns('pk', []); draw();
@@ -336,6 +340,7 @@ function pkLeave() {
 }
 function pkUI(turn) {
   const P = PK.P; if (!P.length) return;
+  if (turn && lastTurnAnnouncement !== turn.n) { announce('Turno de ' + turn.n + '.'); lastTurnAnnouncement = turn.n; }
   $('#pkOpp').replaceChildren(...[1, 2].map(i => {
     const p = P[i], d = el('div', 'opp' + (p.fold ? ' fold' : '')), cs = el('div', 'hand');
     p.cards.forEach(c => cs.append(cardEl(c, !p.show, c.n)));
@@ -355,7 +360,7 @@ function pkUI(turn) {
 }
 $('#pkSit').onclick = () => {
   const b = Math.min(BUYIN, S.money);
-  if (b < 100) { $('#pkMsg0').textContent = 'Você precisa de pelo menos $100. Peça fichas no lobby.'; return; }
+  if (b < 100) { say('pkMsg0', 'Você precisa de pelo menos $100. Peça fichas no lobby.', 'lose', true); return; }
   S.money -= b;
   PK.P = [{ n: 'VOCÊ', h: 1, stack: b }, { n: 'ZÉ PIXEL', a: .35, stack: 500 }, { n: 'DONA 8BIT', a: .6, stack: 500 }];
   PK.seat = true; PK.btn = 0; PK.over = true; $('#pkSitBox').hidden = true; $('#pkTable').hidden = false; $('#pkPot').dataset.msg = ''; draw(); pkHand();

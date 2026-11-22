@@ -1,6 +1,7 @@
 :root{--felt:#0f7a43;--felt2:#0b5f34;--wood:#5a2f14;--gold:#ffd34d;--red:#e0344a;--cream:#f4ecd8;--ink:#14091f;
   --font:'Press Start 2P','Courier New',monospace}
 *{box-sizing:border-box;image-rendering:pixelated}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 html,body{margin:0}
 body{font-family:var(--font);font-size:11px;line-height:1.6;color:var(--cream);min-height:100vh;
   background:repeating-conic-gradient(#24143f 0 25%,#1a0f2e 0 50%) 0 0/32px 32px}
