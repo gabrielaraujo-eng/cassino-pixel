@@ -6,7 +6,7 @@ const mon = n => '$' + Math.round(n).toLocaleString('pt-BR');
 const KEY = 'cassinoPixel_v1';
 
 /* ---------- Estado e save ---------- */
-let S = { money: 1000, played: 0, wins: 0, best: 0, sound: true, pkStack: 0 };
+let S = { money: 1000, played: 0, wins: 0, best: 0, sound: true, pkActive: null };
 try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 function toast(t) { const d = el('div', 'toast'); d.textContent = t; $('#toasts').append(d); setTimeout(() => d.remove(), 4500); }
@@ -288,7 +288,8 @@ async function pkHand() {
   const P = PK.P; setBtns('pk', []);
   P.forEach(p => { if (!p.h && p.stack <= 0) p.stack = 500; p.bet = 0; p.tin = 0; p.fold = false; p.allin = false; p.acted = false; p.cards = []; p.act = ''; p.show = !!p.h; p.start = p.stack; });
   if (P[0].stack <= 0) return pkLeave(true);
-  S.pkStack = P[0].stack; save();
+  S.pkActive = { version: 1, status: 'active', startedAt: Date.now(), hand: S.played + 1 };
+  save();
   PK.board = []; PK.log = []; PK.over = false; PK.btn = (PK.btn + 1) % 3; $('#pkLog').innerHTML = '';
   const deck = newDeck(), sb = (PK.btn + 1) % 3, bb = (PK.btn + 2) % 3;
   post(P[sb], SB); post(P[bb], BB); PK.cur = BB; PK.minR = BB;
@@ -322,14 +323,14 @@ function pkShow() {
   }
   const names = Object.keys(won), me = P[0], net = me.stack - me.start;
   const txt = names.map(n => { const p = P.find(x => x.n === n); return `${n} LEVA ${mon(won[n])}${live.length > 1 ? ' (' + HANDN[catOf(p.sc)] + ')' : ''}`; }).join(' · ');
-  plog(txt); settle(net); S.pkStack = me.stack; pkUI();
+  plog(txt); settle(net); S.pkActive = null; pkUI();
   const out = me.stack <= 0;
   say0(out ? 'VOCÊ PERDEU TODAS AS FICHAS DA MESA' : txt, net > 0 ? 'win' : net < 0 ? 'lose' : '');
   setBtns('pk', out ? [['SAIR DA MESA', () => pkLeave()]] : [['PRÓXIMA MÃO', pkHand, 0, 'green'], ['SAIR DA MESA', () => pkLeave(), 0, 'red']]);
 }
 function say0(t, c) { const m = $('#pkPot'); m.dataset.msg = t; m.dataset.cls = c || ''; pkUI(); }
 function pkLeave() {
-  S.money += PK.P[0] ? PK.P[0].stack : 0; S.pkStack = 0; PK.seat = false; PK.P = []; PK.board = [];
+  S.money += PK.P[0] ? PK.P[0].stack : 0; S.pkActive = null; PK.seat = false; PK.P = []; PK.board = [];
   $('#pkSitBox').hidden = false; $('#pkTable').hidden = true; setBtns('pk', []); draw();
   $('#pkMsg0').textContent = 'Você saiu da mesa e levou suas fichas.';
 }
@@ -350,11 +351,12 @@ function pkUI(turn) {
   m.insertAdjacentHTML('beforeend', `<div>VOCÊ${PK.btn === 0 ? '<span class="dbtn">D</span>' : ''}${turn === me ? ' ◄' : ''} · FICHAS ${mon(me.stack)}</div><div class="bet">${me.bet ? 'APOSTA ' + mon(me.bet) : ''}</div><div class="act">${me.act || ''}</div>`);
   if (!me.fold && me.cards.length && PK.board.length) m.insertAdjacentHTML('beforeend', `<div class="muted">SUA MÃO: ${HANDN[catOf(best([...me.cards, ...PK.board]))]}</div>`);
   P.forEach(p => p.cards.forEach(c => c.n = 0)); PK.board.forEach(c => c.n = 0);
+  if (S.pkActive) save();
 }
 $('#pkSit').onclick = () => {
   const b = Math.min(BUYIN, S.money);
   if (b < 100) { $('#pkMsg0').textContent = 'Você precisa de pelo menos $100. Peça fichas no lobby.'; return; }
-  S.money -= b; S.pkStack = b;
+  S.money -= b;
   PK.P = [{ n: 'VOCÊ', h: 1, stack: b }, { n: 'ZÉ PIXEL', a: .35, stack: 500 }, { n: 'DONA 8BIT', a: .6, stack: 500 }];
   PK.seat = true; PK.btn = 0; PK.over = true; $('#pkSitBox').hidden = true; $('#pkTable').hidden = false; $('#pkPot').dataset.msg = ''; draw(); pkHand();
 };
@@ -390,5 +392,9 @@ async function slSpin() {
 $('#slBtn').onclick = slSpin;
 
 /* ---------- Início ---------- */
-if (S.pkStack > 0) { S.money += S.pkStack; toast(`Você voltou da mesa de poker com ${mon(S.pkStack)}.`); S.pkStack = 0; }
+if (S.pkActive && S.pkActive.version === 1 && S.pkActive.status === 'active') {
+  S.pkActive = null;
+  toast('A mão de pôquer foi encerrada após a recarga. As fichas comprometidas não foram devolvidas.');
+  save();
+}
 draw();
