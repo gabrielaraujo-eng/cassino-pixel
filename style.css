@@ -5,7 +5,7 @@ html,body{margin:0}
 body{font-family:var(--font);font-size:11px;line-height:1.6;color:var(--cream);min-height:100vh;
   background:repeating-conic-gradient(#24143f 0 25%,#1a0f2e 0 50%) 0 0/32px 32px}
 header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 20px;background:#0c0618;box-shadow:0 6px 0 #000}
-.logo{font-size:18px;color:var(--gold);text-shadow:3px 3px 0 #7a1f2b;animation:neon 1.6s steps(2) infinite}
+.logo{margin:0;font-size:18px;color:var(--gold);text-shadow:3px 3px 0 #7a1f2b;animation:neon 1.6s steps(2) infinite}
 .logo span{color:#ff6bd6}
 @keyframes neon{50%{text-shadow:3px 3px 0 #7a1f2b,0 0 12px var(--gold)}}
 .hud{display:flex;align-items:center;gap:10px}
