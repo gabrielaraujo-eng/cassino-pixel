@@ -109,15 +109,15 @@ Criado por **Gabriel Lúcio de Araújo**. A versão publicada neste repositório
 As versões antigas preservadas foram organizadas em [`versoes-antigas/`](./versoes-antigas/), cada uma em sua própria pasta. A versão atual permanece na raiz e continua sendo a referência publicada.
 
 - `1.5` (atual)
-- `1.4` (snapshot anterior à correção da documentação histórica)
-- `1.3` (snapshot anterior ao indicador de foco)
-- `1.2` (snapshot anterior às regiões live)
-- `1.1` (snapshot anterior à inclusão do título principal)
-- `atual` (snapshot anterior à correção de recarga do pôquer)
+- `cassino1.4` (snapshot anterior à correção da documentação histórica)
+- `cassino1.3` (snapshot anterior ao indicador de foco)
+- `cassino1.2` (snapshot anterior às regiões live)
+- `cassino1.1` (snapshot anterior à inclusão do título principal)
+- `cassino1.0` (snapshot inicial)
 
 Snapshots preservados antes de cada etapa:
-- [`atual-antes-issue-5`](./versoes-antigas/atual-antes-issue-5/)
-- [`1.1-antes-issue-6`](./versoes-antigas/1.1-antes-issue-6/)
-- [`1.2-antes-issue-7`](./versoes-antigas/1.2-antes-issue-7/)
-- [`1.3-antes-issue-8`](./versoes-antigas/1.3-antes-issue-8/)
-- [`1.4-antes-issue-9`](./versoes-antigas/1.4-antes-issue-9/)
+- [`cassino1.0`](./versoes-antigas/cassino1.0/)
+- [`cassino1.1`](./versoes-antigas/cassino1.1/)
+- [`cassino1.2`](./versoes-antigas/cassino1.2/)
+- [`cassino1.3`](./versoes-antigas/cassino1.3/)
+- [`cassino1.4`](./versoes-antigas/cassino1.4/)
