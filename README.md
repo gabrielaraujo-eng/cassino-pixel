@@ -18,7 +18,7 @@
 - **[Ver o código no GitHub](https://github.com/gabrielaraujo-eng/cassino-pixel)**
 - **[Abrir o Arcade Gabriel](https://gabriel-lucio-arcade-c27ec.web.app/)**
 
-A versão atual identificada neste repositório é **1.4** e permanece na raiz do projeto.
+A versão atual identificada neste repositório é **1.5** e permanece na raiz do projeto.
 
 ## O que foi melhorado nesta separação
 
@@ -31,6 +31,7 @@ Esta versão foi organizada como um projeto independente a partir do jogo public
 - título principal semântico em `h1` para navegação por leitores de tela e mecanismos de busca;
 - regiões `aria-live` para anúncios de saldo, turno, resultados e erros importantes;
 - indicador de foco de alto contraste para navegação por teclado em controles e mesas;
+- documentação dos snapshots versionados disponíveis no diretório `versoes-antigas/`;
 - workflow preparado para publicação no GitHub Pages;
 - banner e favicon próprios do jogo;
 - remoção dos arquivos de coleta de dados e dos backups técnicos.
@@ -107,8 +108,16 @@ Criado por **Gabriel Lúcio de Araújo**. A versão publicada neste repositório
 
 As versões antigas preservadas foram organizadas em [`versoes-antigas/`](./versoes-antigas/), cada uma em sua própria pasta. A versão atual permanece na raiz e continua sendo a referência publicada.
 
-- `1.4` (atual)
+- `1.5` (atual)
+- `1.4` (snapshot anterior à correção da documentação histórica)
 - `1.3` (snapshot anterior ao indicador de foco)
 - `1.2` (snapshot anterior às regiões live)
 - `1.1` (snapshot anterior à inclusão do título principal)
 - `atual` (snapshot anterior à correção de recarga do pôquer)
+
+Snapshots preservados antes de cada etapa:
+- [`atual-antes-issue-5`](./versoes-antigas/atual-antes-issue-5/)
+- [`1.1-antes-issue-6`](./versoes-antigas/1.1-antes-issue-6/)
+- [`1.2-antes-issue-7`](./versoes-antigas/1.2-antes-issue-7/)
+- [`1.3-antes-issue-8`](./versoes-antigas/1.3-antes-issue-8/)
+- [`1.4-antes-issue-9`](./versoes-antigas/1.4-antes-issue-9/)
