@@ -18,7 +18,7 @@
 - **[Ver o código no GitHub](https://github.com/gabrielaraujo-eng/cassino-pixel)**
 - **[Abrir o Arcade Gabriel](https://gabriel-lucio-arcade-c27ec.web.app/)**
 
-A versão atual identificada neste repositório é **atual** e permanece na raiz do projeto.
+A versão atual identificada neste repositório é **1.1** e permanece na raiz do projeto.
 
 ## O que foi melhorado nesta separação
 
@@ -27,6 +27,7 @@ Esta versão foi organizada como um projeto independente a partir do jogo public
 - título, descrição, autoria e URL canônica para o novo repositório;
 - metadados de tema e compartilhamento para navegadores e redes sociais;
 - documentação de controles, compatibilidade e arquitetura;
+- política transacional para encerrar mãos de pôquer interrompidas por recarga sem reembolso implícito;
 - workflow preparado para publicação no GitHub Pages;
 - banner e favicon próprios do jogo;
 - remoção dos arquivos de coleta de dados e dos backups técnicos.
@@ -103,4 +104,5 @@ Criado por **Gabriel Lúcio de Araújo**. A versão publicada neste repositório
 
 As versões antigas preservadas foram organizadas em [`versoes-antigas/`](./versoes-antigas/), cada uma em sua própria pasta. A versão atual permanece na raiz e continua sendo a referência publicada.
 
-- versões históricas ainda não catalogadas neste repositório
+- `1.1` (atual)
+- `atual` (snapshot anterior à correção de recarga do pôquer)
